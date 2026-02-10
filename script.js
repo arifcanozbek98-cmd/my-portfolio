@@ -9,34 +9,32 @@ const DATA = {
     city: "Annecy, France",
     github: "https://github.com/arifcanozbek98-cmd"
   },
-
- formation: [
-  {
-    title: "Licence 3 Informatique Numérique et Gestion Industrielle (INGI) — IAE",
-    period: "2025–2026",
-    place: "Université Savoie Mont Blanc (France)",
-    details: []
-  },
-  {
-    title: "Cours de français (DUEF) B1/B2 — ACCENTS",
-    period: "2024–2025",
-    place: "Université Savoie Mont Blanc (France)",
-    details: []
-  },
-  {
-    title: "Erasmus+ — Programme Economics (1-year exchange program)",
-    period: "2022–2023",
-    place: "Clermont Auvergne University (France)",
-    details: []
-  },
-  {
-    title: "Licence en Économie (Bac+4) — Université d’Ege",
-    period: "2017–2023",
-    place: "Turquie",
-    details: ["GPA : 2.95 / 4"]
-  }
-],
-
+  formation: [
+    {
+      title: "Licence 3 Informatique Numérique et Gestion Industrielle (INGI) — IAE",
+      period: "2025–2026",
+      place: "Université Savoie Mont Blanc (France)",
+      details: []
+    },
+    {
+      title: "Cours de français (DUEF) B1/B2 — ACCENTS",
+      period: "2024–2025",
+      place: "Université Savoie Mont Blanc (France)",
+      details: []
+    },
+    {
+      title: "Erasmus+ — Programme Economics (1-year exchange program)",
+      period: "2022–2023",
+      place: "Clermont Auvergne University (France)",
+      details: []
+    },
+    {
+      title: "Licence en Économie (Bac+4) — Université d’Ege",
+      period: "2017–2023",
+      place: "Turquie",
+      details: ["GPA : 2.95 / 4"]
+    }
+  ],
   skills: [
     // Web
     { name: "HTML5", group: "Web" },
@@ -116,9 +114,11 @@ function renderFormation() {
             <span class="badge text-bg-light border">${f.period}</span>
           </div>
           <div class="text-secondary small mb-3">${f.place}</div>
-          <ul class="mb-0">
-            ${(f.details || []).map(d => `<li>${d}</li>`).join("")}
-          </ul>
+
+          ${(f.details && f.details.length)
+            ? `<ul class="mb-0">${f.details.map(d => `<li>${d}</li>`).join("")}</ul>`
+            : ``
+          }
         </div>
       </div>
     </div>
@@ -145,10 +145,7 @@ function renderSkills(searchText = "") {
 
   const list = DATA.skills.filter(s => {
     if (!q) return true;
-    return (
-      s.name.toLowerCase().includes(q) ||
-      s.group.toLowerCase().includes(q)
-    );
+    return s.name.toLowerCase().includes(q) || s.group.toLowerCase().includes(q);
   });
 
   row.innerHTML = list.map(s => {
@@ -192,6 +189,35 @@ function setupSkillFilter() {
   });
 }
 
+/* ✅ Lenis Smooth Scroll */
+function setupSmoothScroll() {
+  if (typeof Lenis === "undefined") return;
+
+  const lenis = new Lenis({
+    duration: 2,
+    smoothWheel: true,
+    smoothTouch: false
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // Anchor tıklamalarında smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", (e) => {
+      const id = a.getAttribute("href");
+      const target = document.querySelector(id);
+      if (!target) return;
+
+      e.preventDefault();
+      lenis.scrollTo(target, { offset: -70 }); // sticky navbar offset
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -200,6 +226,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderContact();
   renderFormation();
   renderSkills();
+
   setupTheme();
   setupSkillFilter();
+  setupSmoothScroll();
 });

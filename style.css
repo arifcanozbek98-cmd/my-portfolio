@@ -1,14 +1,16 @@
-/* küçük dokunuş */
+/* Genel görünüm */
 .card { border-radius: 14px; }
-
-/* Daha soft arka plan */
 body { background: #f6f7fb !important; }
 
+/* Lenis kullanırken tarayıcı native smooth kapalı olsun */
+html { scroll-behavior: auto; }
+
+/* Dark mode */
 body.dark { background:#0b1220 !important; color:#e5e7eb !important; }
 body.dark .card { background:#111827; color:#e5e7eb; border-color: rgba(255,255,255,.08); }
 body.dark .text-secondary { color: rgba(229,231,235,.7) !important; }
 
-/* Dark modda input görünürlüğü */
+/* Input dark mod uyumu */
 body.dark .form-control {
   background: #0f172a;
   color: #e5e7eb;
@@ -18,7 +20,7 @@ body.dark .form-control::placeholder {
   color: rgba(229,231,235,.55);
 }
 
-/* Skills kartları modern: hover + gölge */
+/* Skills kart hover */
 .skill-card{
   border: 1px solid rgba(0,0,0,.08);
   box-shadow: 0 6px 18px rgba(0,0,0,.06);
@@ -27,6 +29,10 @@ body.dark .form-control::placeholder {
 .skill-card:hover{
   transform: translateY(-3px);
   box-shadow: 0 10px 26px rgba(0,0,0,.10);
+}
+body.dark .skill-card{
+  border-color: rgba(255,255,255,.10);
+  box-shadow: 0 8px 22px rgba(0,0,0,.35);
 }
 
 /* Formation badge dark mod uyumu */

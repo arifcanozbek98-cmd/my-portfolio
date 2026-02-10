@@ -1,0 +1,37 @@
+/* küçük dokunuş */
+.card { border-radius: 14px; }
+
+/* Daha soft arka plan */
+body { background: #f6f7fb !important; }
+
+body.dark { background:#0b1220 !important; color:#e5e7eb !important; }
+body.dark .card { background:#111827; color:#e5e7eb; border-color: rgba(255,255,255,.08); }
+body.dark .text-secondary { color: rgba(229,231,235,.7) !important; }
+
+/* Dark modda input görünürlüğü */
+body.dark .form-control {
+  background: #0f172a;
+  color: #e5e7eb;
+  border-color: rgba(255,255,255,.12);
+}
+body.dark .form-control::placeholder {
+  color: rgba(229,231,235,.55);
+}
+
+/* Skills kartları modern: hover + gölge */
+.skill-card{
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.skill-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.10);
+}
+
+/* Formation badge dark mod uyumu */
+body.dark #formation .badge.text-bg-light{
+  background: rgba(255,255,255,.10) !important;
+  color: #e5e7eb !important;
+  border-color: rgba(255,255,255,.15) !important;
+}

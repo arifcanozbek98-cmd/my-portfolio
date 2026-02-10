@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arifcan Ozbek — Portfolio</title>
+
+  <!-- Bootstrap CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+
+  <!-- Your JS -->
+  <script src="./script.js" defer></script>
+</head>
+
+<body class="bg-light">
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Arifcan Ozbek</a>
+
+      <button class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#nav"
+              aria-controls="nav"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">Profil</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Compétences</a></li>
+          <li class="nav-item"><a class="nav-link" href="#formation">Formation</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <button id="btnTheme" class="btn btn-outline-light btn-sm ms-lg-3" type="button">Dark</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="py-5 border-bottom">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+          <span class="badge text-bg-primary mb-3">Portfolio</span>
+          <h1 class="display-5 fw-bold">Développeur Web</h1>
+          <p class="text-secondary">Site CV simple</p>
+
+          <div class="d-flex gap-2 flex-wrap">
+            <a class="btn btn-primary" href="#skills">Voir mes compétences</a>
+            <a class="btn btn-outline-secondary" href="#contact">Me contacter</a>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="h6 fw-bold mb-3">Infos rapides</h2>
+              <ul class="list-unstyled mb-0">
+                <li><strong>Ville:</strong> Annecy</li>
+                <li><strong>Email:</strong> arifcanozbek@hotmail.com</li>
+                <li><strong>Tél:</strong> +33 7 73 62 56 63</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="py-5">
+    <div class="container">
+
+      <section id="about" class="mb-5">
+        <h2 class="h4 fw-bold mb-3">Profil</h2>
+        <div id="aboutBox" class="card"><div class="card-body">Chargement...</div></div>
+      </section>
+
+      <section id="skills" class="mb-5">
+        <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-3">
+          <h2 class="h4 fw-bold m-0">Compétences</h2>
+          <input id="skillSearch" class="form-control" style="max-width:260px" placeholder="Filtrer...">
+        </div>
+        <div id="skillsRow" class="row g-3"></div>
+      </section>
+
+      <section id="formation" class="mb-5">
+        <h2 class="h4 fw-bold mb-3">Formation</h2>
+        <div id="formationBox" class="row g-3"></div>
+      </section>
+
+      <section id="contact">
+        <h2 class="h4 fw-bold mb-3">Contact</h2>
+        <div id="contactBox" class="card"><div class="card-body">Chargement...</div></div>
+      </section>
+
+      <footer class="text-center text-secondary small mt-5">
+        © <span id="year"></span> Arifcan Ozbek
+      </footer>
+    </div>
+  </main>
+</body>
+</html>

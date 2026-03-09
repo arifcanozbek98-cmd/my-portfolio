@@ -137,12 +137,4 @@ ou
 	•	Filtre de compétences en direct
 	•	Dark/Light mode
 
-⸻
-
-11) Améliorations possibles (optionnel)
-	•	Ajouter une section “Projets”
-	•	Ajouter un formulaire de contact
-	•	Ajouter des animations légères (mais pas obligatoire)
-
-⸻
 

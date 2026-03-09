@@ -3,6 +3,7 @@
    Not: Buradaki DATA, sitedeki yazıların "deposu" gibi.
    JS bu verileri alıp HTML içine otomatik yerleştiriyor.
    ========================================================= */
+
 const DATA = {
   /* Profil bölümü (About) */
   about: {

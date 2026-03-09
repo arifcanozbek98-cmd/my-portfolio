@@ -1,4 +1,4 @@
-README — Portfolio (Bootstrap + JavaScript)
+README — Portfolio 
 
 1) Objectif du projet
 

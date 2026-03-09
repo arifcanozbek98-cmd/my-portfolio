@@ -1,6 +1,6 @@
 /* ============================
    Genel görünüm (global)
-   ============================ */
+   ============================ */ 
    /* Sayfa genelinde yumuşak kaydırma (smooth scroll) ve navbar yüksekliği kadar boşluk bırakır */
 html{
   scroll-behavior: smooth;

@@ -1,41 +1,96 @@
-/* Genel görünüm */
+/* ============================
+   Genel görünüm (global)
+   ============================ */
+   /* Sayfa genelinde yumuşak kaydırma (smooth scroll) ve navbar yüksekliği kadar boşluk bırakır */
+html{
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+/* Bootstrap kartlarının köşelerini yuvarlar */
 .card { border-radius: 14px; }
+
+/* Açık bir arka planı zorla uygular (Bootstrap farklı bir arka plan verirse işe yarar) */
 body { background: #f6f7fb !important; }
 
-/* Lenis kullanırken tarayıcı native smooth kapalı olsun */
-html { scroll-behavior: auto; }
+/* ============================
+   Koyu mod (dark mode): arka plan + renkler
+   ============================ */
 
-/* Dark mode */
+/* <body> elementine "dark" sınıfı gelince koyu tema aktif olur:
+   - arka plan koyu
+   - yazılar açık */
 body.dark { background:#0b1220 !important; color:#e5e7eb !important; }
-body.dark .card { background:#111827; color:#e5e7eb; border-color: rgba(255,255,255,.08); }
-body.dark .text-secondary { color: rgba(229,231,235,.7) !important; }
 
-/* Input dark mod uyumu */
+/* Koyu modda kartların stili:
+   - body’den biraz farklı koyu arka plan
+   - yazılar açık
+   - ince, hafif bir kenarlık */
+body.dark .card {
+  background:#111827;
+  color:#e5e7eb;
+  border-color: rgba(255,255,255,.08);
+}
+
+/* Bootstrap’in "text-secondary" yazılarını koyu modda daha görünür (daha açık) yapar */
+body.dark .text-secondary {
+  color: rgba(229,231,235,.7) !important;
+}
+
+
+/* ============================
+   Input alanları: koyu mod uyumu
+   ============================ */
+
+/* Koyu modda form alanlarının arka planı, yazısı ve kenarlığını ayarlar */
 body.dark .form-control {
   background: #0f172a;
   color: #e5e7eb;
   border-color: rgba(255,255,255,.12);
 }
+
+/* Koyu modda placeholder (örnek yazı) rengini ayarlar */
 body.dark .form-control::placeholder {
   color: rgba(229,231,235,.55);
 }
 
-/* Skills kart hover */
+
+/* ============================
+   "Skills" kartları: hover (üzerine gelince) efekti
+   ============================ */
+
+/* Yetenek kartlarının varsayılan görünümü:
+   - hafif kenarlık
+   - yumuşak gölge
+   - akıcı bir animasyon için transition */
 .skill-card{
   border: 1px solid rgba(0,0,0,.08);
   box-shadow: 0 6px 18px rgba(0,0,0,.06);
   transition: transform .15s ease, box-shadow .15s ease;
 }
+
+/* Üzerine gelince (hover):
+   - kart hafif yukarı çıkar
+   - gölge biraz daha belirgin olur */
 .skill-card:hover{
   transform: translateY(-3px);
   box-shadow: 0 10px 26px rgba(0,0,0,.10);
 }
+
+/* Koyu mod varyantı:
+   - kenarlık daha açık görünür
+   - gölge daha güçlü olur (koyu fonda kaybolmasın diye) */
 body.dark .skill-card{
   border-color: rgba(255,255,255,.10);
   box-shadow: 0 8px 22px rgba(0,0,0,.35);
 }
 
-/* Formation badge dark mod uyumu */
+
+/* ============================
+   "Formation" bölümündeki rozet (badge) - koyu mod
+   ============================ */
+
+/* Bootstrap’in "text-bg-light" rozeti koyu modda fazla açık kalır,
+   bu yüzden yarı saydam bir arka plan + açık renk yazı veriyoruz */
 body.dark #formation .badge.text-bg-light{
   background: rgba(255,255,255,.10) !important;
   color: #e5e7eb !important;

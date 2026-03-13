@@ -1,200 +1,142 @@
-/* =========================================================
-   SİTE VERİLERİ (İçerik / metinler)
-   Not: Buradaki DATA, sitedeki yazıların "deposu" gibi.
-   JS bu verileri alıp HTML içine otomatik yerleştiriyor.
-   ========================================================= */
-const DATA = {
-  /* Profil bölümü (About) */
-  about: {
-    title: "Objectif",
-    text: "Étudiant en L3 INGI. Je veux un stage et progresser en JavaScript, HTML, CSS et outils data."
-  },
+// =========================
+// Element selection
+// =========================
+const body = document.body;
+const navToggle = document.getElementById("navToggle");
+const navMenu = document.getElementById("navMenu");
+const navLinks = document.querySelectorAll(".nav-link");
+const themeToggle = document.getElementById("themeToggle");
+const backToTopButton = document.getElementById("backToTop");
+const revealItems = document.querySelectorAll(".reveal");
+const sections = document.querySelectorAll("main section[id]");
+const filterButtons = document.querySelectorAll(".filter-btn");
+const projectCards = document.querySelectorAll(".project-card");
 
-  /* İletişim bilgileri */
-  contact: {
-    email: "arifcanozbek@hotmail.com",
-    phone: "+33 7 73 62 56 63",
-    city: "Annecy, France",
-    github: "https://github.com/arifcanozbek98-cmd"
-  },
+// =========================
+// Mobile navigation toggle
+// =========================
+if (navToggle && navMenu) {
+  navToggle.addEventListener("click", () => {
+    const isOpen = navMenu.classList.toggle("open");
 
-  /* Eğitim / formation listesi
-     NOT: details (ek madde) kaldırıldı => daha basit
-  */
-  formation: [
-    {
-      title: "Licence 3 INGI — IAE",
-      period: "2025–2026",
-      place: "Université Savoie Mont Blanc (France)"
-    },
-    {
-      title: "Cours de français (DUEF) B1/B2 — ACCENTS",
-      period: "2024–2025",
-      place: "Université Savoie Mont Blanc (France)"
-    },
-    {
-      title: "Erasmus+ — Economics (1-year exchange)",
-      period: "2022–2023",
-      place: "Clermont Auvergne University (France)"
-    },
-    {
-      title: "Licence en Économie (Bac+4) — Université d’Ege",
-      period: "2017–2023",
-      place: "Turquie"
-    }
-  ],
-
-  /* Yetenekler (skills)
-     group: kategori, name: görünen isim
-  */
-  skills: [
-    { name: "HTML5", group: "Web" },
-    { name: "CSS3", group: "Web" },
-    { name: "Bootstrap 5", group: "Web" },
-    { name: "JavaScript (ES6+)", group: "Web" },
-
-    { name: "Git / GitHub (bases)", group: "Outils" },
-    { name: "VS Code", group: "Outils" },
-    { name: "Terminal / CLI (bases)", group: "Outils" },
-
-    { name: "SQL (bases)", group: "Data" },
-    { name: "Power BI (notions)", group: "Data" },
-    { name: "Excel (bases)", group: "Data" }
-  ]
-};
-
-/* =========================================================
-   PROFİL (About) bölümünü ekrana basma
-   Amaç: DATA.about içindeki title + text'i #aboutBox içine koymak
-   ========================================================= */
-function renderAbout() {
-  const box = document.querySelector("#aboutBox .card-body");
-  if (!box) return;
-
-  box.innerHTML = `
-    <h3 class="h6 fw-bold">${DATA.about.title}</h3>
-    <p class="mb-0 text-secondary">${DATA.about.text}</p>
-  `;
-}
-
-/* =========================================================
-   CONTACT bölümünü ekrana basma
-   Amaç: DATA.contact içindeki bilgileri #contactBox içine koymak
-   ========================================================= */
-function renderContact() {
-  const box = document.querySelector("#contactBox .card-body");
-  if (!box) return;
-
-  const c = DATA.contact;
-
-  box.innerHTML = `
-    <p class="mb-1"><strong>Email:</strong> <a href="mailto:${c.email}">${c.email}</a></p>
-    <p class="mb-1"><strong>Tél:</strong> <a href="tel:${c.phone}">${c.phone}</a></p>
-    <p class="mb-1"><strong>Ville:</strong> ${c.city}</p>
-    <p class="mb-0"><strong>GitHub:</strong> <a href="${c.github}" target="_blank" rel="noreferrer">Lien</a></p>
-  `;
-}
-
-/* =========================================================
-   FORMATION (Eğitim) bölümünü ekrana basma
-   Amaç: DATA.formation dizisini kartlara çevirip #formationBox içine koymak
-   NOT: details + koşullu template kaldırıldı => daha kolay
-   ========================================================= */
-function renderFormation() {
-  const box = document.getElementById("formationBox");
-  if (!box) return;
-
-  box.innerHTML = DATA.formation
-    .map((f) => `
-      <div class="col-12 col-md-6">
-        <div class="card h-100">
-          <div class="card-body">
-            <div class="d-flex justify-content-between flex-wrap gap-2 mb-2">
-              <h3 class="h6 fw-bold m-0">${f.title}</h3>
-              <span class="badge text-bg-light border">${f.period}</span>
-            </div>
-            <div class="text-secondary small">${f.place}</div>
-          </div>
-        </div>
-      </div>
-    `)
-    .join("");
-}
-
-/* =========================================================
-   SKILLS bölümünü ekrana basma + filtreleme
-   Not: getBadgeClass kaldırıldı -> tüm badge'ler tek renk (secondary)
-   ========================================================= */
-function renderSkills(searchText = "") {
-  const row = document.getElementById("skillsRow");
-  if (!row) return;
-
-  const q = searchText.trim().toLowerCase();
-
-  const list = DATA.skills.filter((s) => {
-    if (!q) return true;
-    return s.name.toLowerCase().includes(q) || s.group.toLowerCase().includes(q);
-  });
-
-  row.innerHTML = list
-    .map((s) => `
-      <div class="col-6 col-md-4 col-lg-3">
-        <div class="card h-100 skill-card">
-          <div class="card-body">
-            <span class="badge text-bg-secondary mb-2">${s.group}</span>
-            <div class="fw-bold">${s.name}</div>
-          </div>
-        </div>
-      </div>
-    `)
-    .join("");
-}
-
-/* =========================================================
-   LIGHT / DARK tema
-   Not: localStorage kaldırıldı => sadece anlık toggle (daha kolay)
-   ========================================================= */
-function setupTheme() {
-  const btn = document.getElementById("btnTheme");
-  if (!btn) return;
-
-  // Sayfa ilk açılınca buton yazısını ayarla
-  btn.textContent = document.body.classList.contains("dark") ? "Light" : "Dark";
-
-  btn.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
-    btn.textContent = document.body.classList.contains("dark") ? "Light" : "Dark";
+    body.classList.toggle("menu-open", isOpen);
+    navToggle.setAttribute("aria-expanded", String(isOpen));
   });
 }
 
-/* =========================================================
-   Skill filtre input'u (anlık filtre)
-   input'a her yazıldığında renderSkills tekrar çağrılır
-   ========================================================= */
-function setupSkillFilter() {
-  const input = document.getElementById("skillSearch");
-  if (!input) return;
-
-  input.addEventListener("input", () => {
-    renderSkills(input.value);
+// Close mobile menu when a nav link is clicked
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    navMenu.classList.remove("open");
+    body.classList.remove("menu-open");
+    navToggle.setAttribute("aria-expanded", "false");
   });
-}
-
-/* =========================================================
-   SAYFA AÇILINCA ÇALIŞAN KISIM (başlangıç)
-   DOMContentLoaded: HTML tamamen yüklenince çalışır
-   ========================================================= */
-document.addEventListener("DOMContentLoaded", () => {
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  // İlk ekran çizimleri
-  renderAbout();
-  renderContact();
-  renderFormation();
-  renderSkills();
-
-  // Davranış/etkileşim ayarları
-  setupTheme();
-  setupSkillFilter();
 });
+
+// =========================
+// Theme toggle with localStorage
+// =========================
+const savedTheme = localStorage.getItem("preferred-theme");
+
+if (savedTheme === "light") {
+  body.classList.add("light-theme");
+}
+
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("light-theme");
+
+  const currentTheme = body.classList.contains("light-theme") ? "light" : "dark";
+  localStorage.setItem("preferred-theme", currentTheme);
+});
+
+// =========================
+// Reveal on scroll animation
+// =========================
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  },
+  {
+    threshold: 0.15,
+  }
+);
+
+revealItems.forEach((item) => {
+  revealObserver.observe(item);
+});
+
+// =========================
+// Active navbar link on scroll
+// =========================
+function updateActiveNavLink() {
+  let currentSectionId = "home";
+
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop - 140;
+    const sectionHeight = section.offsetHeight;
+
+    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+      currentSectionId = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach((link) => {
+    const target = link.getAttribute("href");
+    link.classList.toggle("active", target === `#${currentSectionId}`);
+  });
+}
+
+// =========================
+// Back-to-top visibility
+// =========================
+function updateBackToTopButton() {
+  if (window.scrollY > 500) {
+    backToTopButton.classList.add("show");
+  } else {
+    backToTopButton.classList.remove("show");
+  }
+}
+
+backToTopButton.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
+
+// =========================
+// Project filtering
+// =========================
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const selectedFilter = button.dataset.filter;
+
+    // Update active button style
+    filterButtons.forEach((btn) => btn.classList.remove("active"));
+    button.classList.add("active");
+
+    // Show only matching projects
+    projectCards.forEach((card) => {
+      const category = card.dataset.category;
+      const shouldShow = selectedFilter === "all" || category === selectedFilter;
+
+      card.classList.toggle("hidden", !shouldShow);
+    });
+  });
+});
+
+// =========================
+// Scroll-related updates
+// =========================
+window.addEventListener("scroll", () => {
+  updateActiveNavLink();
+  updateBackToTopButton();
+});
+
+// Run once on page load
+updateActiveNavLink();
+updateBackToTopButton();

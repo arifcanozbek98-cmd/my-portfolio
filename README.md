@@ -3,6 +3,7 @@
 A modern and responsive personal CV website built with **HTML**, **CSS**, and **JavaScript**.  
 This project presents my academic background, technical skills, projects, professional experience, and contact information in a clean and professional web format.
 
+https://arifcanozbek98-cmd.github.io/my-portfolio/ 
 ## Preview
 
 This website includes:
